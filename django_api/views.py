@@ -11,6 +11,17 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
 
 
+class ProfileFeedItemViewSet(viewsets.ModelViewSet):
+    """handles creating, reading and updating profile feed item"""
+    serializer_class = serializers.ProfileFeedItemSerializer
+    queryset = models.ProfileFeedItem.objects.all()
+    authentication_classes = (TokenAuthentication,)
+
+    def perform_create(self, serializer):
+        """set the user profile to the logged in user"""
+        serializer.save(user_profile=self.request.user)
+
+
 class UserLoginApiView(ObtainAuthToken):
     """Handle creating user authentication token"""
     renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
