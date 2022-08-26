@@ -15,7 +15,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'email', 'password')
         extra_kwargs = {
             'password': {
-                'write_only': True
+                'write_only': True,
                 'style': {'input_style': 'password'}
             }
         }
@@ -23,7 +23,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         """create and return a new user"""
         user = models.UserProfile.objects.create_user(
-            email=validated_date['email'],
+            email=validated_data['email'],
             name=validated_data['name'],
             password=validated_data['password']
         )
