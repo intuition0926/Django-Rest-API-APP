@@ -3,6 +3,14 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import viewsets
 from django_api import serializers
+from django_api import models
+
+
+class UserProfileViewSet(viewsets.ModelViewSet):
+    """handle creating and updating profiles"""
+    serializer_class = serializer.UserProfileSerializer
+    queryset = models.UserProfile.objects.all()
+
 
 
 class HelloViewSet(viewsets.ViewSet):
