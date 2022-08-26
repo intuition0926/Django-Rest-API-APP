@@ -8,7 +8,7 @@ from django_api import models
 
 class UserProfileViewSet(viewsets.ModelViewSet):
     """handle creating and updating profiles"""
-    serializer_class = serializer.UserProfileSerializer
+    serializer_class = serializers.UserProfileSerializer
     queryset = models.UserProfile.objects.all()
 
 
