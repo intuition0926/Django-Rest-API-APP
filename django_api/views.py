@@ -6,7 +6,7 @@ from django_api import serializers
 from django_api import models
 from rest_framework.authentication import TokenAuthentication
 from django_api import permissions
-
+from rest_framework import filters
 
 class UserProfileViewSet(viewsets.ModelViewSet):
     """handle creating and updating profiles"""
@@ -14,6 +14,8 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = models.UserProfile.objects.all()
     authentication_classes = (TokenAuthentication,)
     permission_classes = (permissions.UserPermission,)
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name', 'email',)
 
 
 class HelloViewSet(viewsets.ViewSet):
